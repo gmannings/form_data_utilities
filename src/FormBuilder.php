@@ -15,6 +15,18 @@ class FormBuilder {
   protected array $formElements = [];
 
   /**
+   * @param \Drupal\form_data_utilities\ElementType $elementType
+   *
+   * @return \Drupal\form_data_utilities\FormBuilder\FormElementInterface
+   */
+  public function addElement(ElementType $elementType): FormElementInterface {
+    $fqn = $this->getElementClassName($elementType);
+    $formElement = new $fqn($this);
+    $this->formElements[] = &$formElement;
+    return $formElement;
+  }
+
+  /**
    * Convert the Drupal render element name to the corresponding class.
    *
    * @param \Drupal\form_data_utilities\ElementType $elementType
@@ -34,17 +46,12 @@ class FormBuilder {
   }
 
   /**
-   * @param \Drupal\form_data_utilities\ElementType $elementType
+   * Get the list of form elements.
    *
-   * @return \Drupal\form_data_utilities\FormBuilder\FormElementInterface
+   * @return \Drupal\form_data_utilities\FormBuilder\FormElementInterface[]
    */
-  public function addElement(ElementType $elementType): FormElementInterface {
-    $fqn = $this->getElementClassName($elementType);
-    $formElement = new $fqn($this);
-    $this->formElements[] = &$formElement;
-    return $formElement;
+  public function getFormElements(): array {
+    return $this->formElements;
   }
-
-
 
 }
