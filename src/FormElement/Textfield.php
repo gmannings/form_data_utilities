@@ -2,8 +2,8 @@
 
 namespace Drupal\form_data_utilities\FormElement;
 
-use Drupal\form_data_utilities\FormBuilder\FormElement;
-use Drupal\form_data_utilities\FormBuilder\FormElementInterface;
+use Drupal\form_data_utilities\FormElement;
+use Drupal\form_data_utilities\FormElementInterface;
 
 class Textfield extends FormElement implements FormElementInterface {
 

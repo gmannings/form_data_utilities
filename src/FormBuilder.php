@@ -2,8 +2,6 @@
 
 namespace Drupal\form_data_utilities;
 
-use Drupal\form_data_utilities\FormBuilder\FormElementInterface;
-
 /**
  * Builder pattern for creating Drupal form render arrays.
  */
@@ -17,7 +15,7 @@ class FormBuilder {
   /**
    * @param \Drupal\form_data_utilities\ElementType $elementType
    *
-   * @return \Drupal\form_data_utilities\FormBuilder\FormElementInterface
+   * @return \Drupal\form_data_utilities\FormElementInterface
    */
   public function addElement(ElementType $elementType): FormElementInterface {
     $fqn = $this->getElementClassName($elementType);
@@ -48,7 +46,7 @@ class FormBuilder {
   /**
    * Get the list of form elements.
    *
-   * @return \Drupal\form_data_utilities\FormBuilder\FormElementInterface[]
+   * @return \Drupal\form_data_utilities\FormElementInterface[]
    */
   public function getFormElements(): array {
     return $this->formElements;

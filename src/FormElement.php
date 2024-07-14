@@ -1,8 +1,6 @@
 <?php
 
-namespace Drupal\form_data_utilities\FormBuilder;
-
-use Drupal\form_data_utilities\FormBuilder;
+namespace Drupal\form_data_utilities;
 
 abstract class FormElement implements FormElementInterface {
 
