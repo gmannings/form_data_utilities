@@ -27,13 +27,4 @@ class Textfield extends FormElement implements FormElementInterface {
     $this->type = ElementType::TEXT_FIELD;
   }
 
-  /**
-   * @return string[]
-   */
-  public function getRenderArray(): array {
-    return [
-      '#type' => 'textfield',
-    ];
-  }
-
 }

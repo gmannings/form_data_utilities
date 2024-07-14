@@ -17,7 +17,42 @@ abstract class FormElement implements FormElementInterface {
   }
 
   public function getRenderArray(): array {
-    return [];
+    $render = [];
+
+    $reflection = new \ReflectionClass($this);
+    $traits = $reflection->getTraits();
+
+    foreach ($traits as $trait) {
+      foreach ($trait->getProperties() as $property) {
+        $propertyName = $property->getName();
+        $getterMethod = 'get' . ucfirst($propertyName);
+
+        if (!$reflection->hasMethod($getterMethod)) {
+          continue;
+        }
+        $value = $this->$getterMethod();
+        if (is_null($value)) {
+          continue;
+        }
+
+        $snakeCaseName = $this->camelToSnakeCase($propertyName);
+        $render['#' . $snakeCaseName] = $value;
+      }
+    }
+
+    $render['#type'] = $this->type->value;
+
+    return $render;
+  }
+
+  /**
+   * Converts camelCase to snake_case
+   *
+   * @param string $input
+   * @return string
+   */
+  protected function camelToSnakeCase(string $input): string {
+    return strtolower(preg_replace('/[A-Z]/', '_$0', lcfirst($input)));
   }
 
 }
