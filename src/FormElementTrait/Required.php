@@ -15,17 +15,16 @@ trait Required {
   /**
    * @return bool
    */
-  public function isRequired(): bool {
+  public function getRequired(): bool {
     return $this->required;
   }
 
   /**
    * @param bool $required
-   *
-   * @return void
    */
-  public function setRequired(bool $required): void {
+  public function setRequired(bool $required): self {
     $this->required = $required;
+    return $this;
   }
 
 }

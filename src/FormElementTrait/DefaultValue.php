@@ -21,11 +21,10 @@ trait DefaultValue {
 
   /**
    * @param string|null $defaultValue
-   *
-   * @return void
    */
-  public function setDefaultValue(?string $defaultValue): void {
+  public function setDefaultValue(?string $defaultValue): self {
     $this->defaultValue = $defaultValue;
+    return $this;
   }
 
 }

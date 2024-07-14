@@ -24,11 +24,10 @@ trait Pattern {
 
   /**
    * @param string|null $pattern
-   *
-   * @return void
    */
-  public function setPattern(?string $pattern): void {
+  public function setPattern(?string $pattern): self {
     $this->pattern = $pattern;
+    return $this;
   }
 
 }

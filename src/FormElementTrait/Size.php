@@ -21,11 +21,10 @@ trait Size {
 
   /**
    * @param int|null $size
-   *
-   * @return void
    */
-  public function setSize(?int $size): void {
+  public function setSize(?int $size): self {
     $this->size = $size;
+    return $this;
   }
 
 }

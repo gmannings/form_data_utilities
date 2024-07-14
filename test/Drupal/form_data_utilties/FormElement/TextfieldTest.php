@@ -17,6 +17,7 @@ class TextfieldTest extends TestCase {
     $this->assertEquals(
       [
         '#type' => 'textfield',
+        '#required' => FALSE,
       ],
       $this->element->getRenderArray()
     );
@@ -30,6 +31,29 @@ class TextfieldTest extends TestCase {
     $this->assertTrue(method_exists($this->element, 'setPattern'));
     $this->assertTrue(method_exists($this->element, 'setSize'));
     $this->assertTrue(method_exists($this->element, 'setRequired'));
+  }
+
+  #[Test] public function testDataMethods(): void {
+    $this->element = new Textfield($this->mockFormBuilder);
+    $this->element
+      ->setTitle('Title')
+      ->setDefaultValue('Default value')
+      ->setSize(60)
+      ->setRequired(TRUE)
+      ->setMaxlength(120)
+      ->setPattern('some-prefix-[a-z]+');
+    $this->assertEquals(
+      [
+        '#type' => 'textfield',
+        '#title' => 'Title',
+        '#default_value' => 'Default value',
+        '#size' => 60,
+        '#required' => TRUE,
+        '#maxlength' => 120,
+        '#pattern' => 'some-prefix-[a-z]+',
+      ],
+      $this->element->getRenderArray()
+    );
   }
 
   protected function setUp(): void {

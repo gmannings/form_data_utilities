@@ -15,19 +15,18 @@ trait Title {
   protected ?string $title = NULL;
 
   /**
-   * @param string|null $title
-   *
-   * @return void
-   */
-  public function setTitle(?string $title): void {
-    $this->title = $title;
-  }
-
-  /**
    * @return string|null
    */
   public function getTitle(): ?string {
     return $this->title;
+  }
+
+  /**
+   * @param string|null $title
+   */
+  public function setTitle(?string $title): self {
+    $this->title = $title;
+    return $this;
   }
 
 }

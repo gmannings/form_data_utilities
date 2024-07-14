@@ -10,22 +10,21 @@ trait Maxlength {
   /**
    * @var int|null
    */
-  protected ?int $maxLength = NULL;
+  protected ?int $maxlength = NULL;
 
   /**
    * @return int|null
    */
-  public function getMaxLength(): ?int {
-    return $this->maxLength;
+  public function getMaxlength(): ?int {
+    return $this->maxlength;
   }
 
   /**
-   * @param int|null $maxLength
-   *
-   * @return void
+   * @param int|null $maxlength
    */
-  public function setMaxLength(?int $maxLength): void {
-    $this->maxLength = $maxLength;
+  public function setMaxlength(?int $maxlength): self {
+    $this->maxlength = $maxlength;
+    return $this;
   }
 
 }
