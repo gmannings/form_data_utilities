@@ -56,6 +56,27 @@ class TextfieldTest extends TestCase {
     );
   }
 
+  #[Test] public function testAttributeMethods(): void {
+    $this->element = new Textfield($this->mockFormBuilder);
+    $this->element
+      ->setAttributeId('my-id')
+      ->setAttributeClass(['my-class'])
+      ->setAttributeName('my-name');
+
+    $this->assertEquals(
+      [
+        '#type' => 'textfield',
+        '#attributes' => [
+          'id' => 'my-id',
+          'class' => ['my-class'],
+          'name' => 'my-name',
+        ],
+        '#required' => FALSE,
+      ],
+      $this->element->getRenderArray()
+    );
+  }
+
   protected function setUp(): void {
     parent::setUp();
     $this->mockFormBuilder = $this->createMock(FormBuilder::class);

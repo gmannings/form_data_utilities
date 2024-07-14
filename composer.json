@@ -1,0 +1,15 @@
+{
+    "name": "drupal/form_data_utilities",
+    "description": "Utilities that make managing form render arrays and form data easier.",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "^11.2"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Drupal\\form_data_utilities\\": "src/"
+        }
+    },
+    "require": {}
+}

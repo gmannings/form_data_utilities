@@ -11,6 +11,11 @@ interface FormElementInterface {
    */
   public function done(): FormBuilder|FormElementInterface;
 
+  /**
+   * Get the element's render array with populated properties.
+   *
+   * @return array
+   */
   public function getRenderArray(): array;
 
 }

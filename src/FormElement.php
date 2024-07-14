@@ -7,10 +7,9 @@ abstract class FormElement implements FormElementInterface {
   protected ElementType $type;
 
   public function __construct(
-    protected FormBuilder           $formBuilder,
+    protected FormBuilder $formBuilder,
     protected ?FormElementInterface $parent = NULL
-  ) {
-  }
+  ) {}
 
   public function done(): FormBuilder|FormElementInterface {
     return is_null($this->parent) ? $this->formBuilder : $this->parent;
@@ -34,9 +33,20 @@ abstract class FormElement implements FormElementInterface {
         if (is_null($value)) {
           continue;
         }
-
-        $snakeCaseName = $this->camelToSnakeCase($propertyName);
-        $render['#' . $snakeCaseName] = $value;
+        // Attributes are a special case that need nesting correctly.
+        if (str_contains($propertyName, 'attribute')) {
+          if (!isset($render['#attributes'])) {
+            $render['#attributes'] = [];
+          }
+          $snakeCaseName = $this->camelToSnakeCase(
+            str_replace('attribute', '', $propertyName)
+          );
+          $render['#attributes'][$snakeCaseName] = $value;
+        }
+        else {
+          $snakeCaseName = $this->camelToSnakeCase($propertyName);
+          $render['#' . $snakeCaseName] = $value;
+        }
       }
     }
 
@@ -49,6 +59,7 @@ abstract class FormElement implements FormElementInterface {
    * Converts camelCase to snake_case
    *
    * @param string $input
+   *
    * @return string
    */
   protected function camelToSnakeCase(string $input): string {
