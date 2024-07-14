@@ -16,6 +16,34 @@ class FormBuilder {
   protected array $formElements = [];
 
   /**
+   * Get the list of form elements.
+   *
+   * @return \Drupal\form_data_utilities\FormElementInterface[]
+   */
+  public function getFormElements(): array {
+    return $this->formElements;
+  }
+
+  /**
+   * @return array
+   */
+  public function getRenderArray(): array {
+    return array_map(
+      function($element) {
+        return $element->getRenderArray();
+      },
+      $this->formElements
+    );
+  }
+
+  /**
+   * @return \Drupal\form_data_utilities\FormElement\Textfield|\Drupal\form_data_utilities\FormElementInterface
+   */
+  public function addTextfield(): Textfield|FormElementInterface {
+    return $this->addElement(ElementType::TEXT_FIELD);
+  }
+
+  /**
    * @param \Drupal\form_data_utilities\ElementType $elementType
    *
    * @return \Drupal\form_data_utilities\FormElementInterface
@@ -44,22 +72,6 @@ class FormBuilder {
       }
     }
     return '\\Drupal\\form_data_utilities\\FormElement\\' . implode('', $parts);
-  }
-
-  /**
-   * Get the list of form elements.
-   *
-   * @return \Drupal\form_data_utilities\FormElementInterface[]
-   */
-  public function getFormElements(): array {
-    return $this->formElements;
-  }
-
-  /**
-   * @return \Drupal\form_data_utilities\FormElement\Textfield|\Drupal\form_data_utilities\FormElementInterface
-   */
-  public function addTextfield(): Textfield|FormElementInterface {
-    return $this->addElement(ElementType::TEXT_FIELD);
   }
 
   /**

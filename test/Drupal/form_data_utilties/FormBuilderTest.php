@@ -16,6 +16,37 @@ class FormBuilderTest extends TestCase {
     $this->assertCount(1, $this->formBuilder->getFormElements());
   }
 
+  /**
+   * Test that creating a form with elements
+   *
+   * @return void
+   */
+  #[Test] public function testCreateForm(): void {
+    $this->formBuilder
+      ->addButton()
+      ->setValue('My Button')
+      ->done()
+      ->addTextfield()
+      ->setTitle('My text area')
+      ->setSize(60);
+
+    $this->assertEquals(
+      [
+        [
+          '#type' => 'button',
+          '#value' => 'My Button',
+        ],
+        [
+          '#type' => 'textfield',
+          '#title' => 'My text area',
+          '#size' => 60,
+          '#required' => FALSE,
+        ]
+      ],
+      $this->formBuilder->getRenderArray()
+    );
+  }
+
   protected function setUp(): void {
     parent::setUp();
     $this->formBuilder = new FormBuilder();
