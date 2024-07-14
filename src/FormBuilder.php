@@ -40,7 +40,7 @@ class FormBuilder {
    */
   public function addElement(ElementType $elementType): FormElementInterface {
     $fqn = $this->getElementClassName($elementType);
-    $formElement = new $fqn();
+    $formElement = new $fqn($this);
     $this->formElements[] = &$formElement;
     return $formElement;
   }

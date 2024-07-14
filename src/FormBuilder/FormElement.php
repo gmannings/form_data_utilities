@@ -8,7 +8,7 @@ abstract class FormElement implements FormElementInterface {
 
   public function __construct(
     protected FormBuilder           $formBuilder,
-    protected ?FormElementInterface $parent
+    protected ?FormElementInterface $parent = NULL
   ) {
   }
 
