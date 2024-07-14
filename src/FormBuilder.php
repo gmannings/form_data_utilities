@@ -2,6 +2,9 @@
 
 namespace Drupal\form_data_utilities;
 
+use Drupal\form_data_utilities\FormElement\Button;
+use Drupal\form_data_utilities\FormElement\Textfield;
+
 /**
  * Builder pattern for creating Drupal form render arrays.
  */
@@ -50,6 +53,20 @@ class FormBuilder {
    */
   public function getFormElements(): array {
     return $this->formElements;
+  }
+
+  /**
+   * @return \Drupal\form_data_utilities\FormElement\Textfield|\Drupal\form_data_utilities\FormElementInterface
+   */
+  public function addTextfield(): Textfield|FormElementInterface {
+    return $this->addElement(ElementType::TEXT_FIELD);
+  }
+
+  /**
+   * @return \Drupal\form_data_utilities\FormElement\Button|\Drupal\form_data_utilities\FormElementInterface
+   */
+  public function addButton(): Button|FormElementInterface {
+    return $this->addElement(ElementType::BUTTON);
   }
 
 }
