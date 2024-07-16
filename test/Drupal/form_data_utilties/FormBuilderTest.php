@@ -11,7 +11,10 @@ class FormBuilderTest extends TestCase {
   protected FormBuilder $formBuilder;
 
   #[Test] public function testAddElement(): void {
-    $formElement = $this->formBuilder->addElement(ElementType::TEXT_FIELD);
+    $formElement = $this->formBuilder->addElement(
+      ElementType::TEXT_FIELD,
+      'textfield'
+    );
     $this->assertEquals(Textfield::class, $formElement::class);
     $this->assertCount(1, $this->formBuilder->getFormElements());
   }
@@ -23,22 +26,22 @@ class FormBuilderTest extends TestCase {
    */
   #[Test] public function testCreateForm(): void {
     $this->formBuilder
-      ->addButton()
+      ->addButton('button')
       ->setValue('My Button')
       ->done()
-      ->addTextfield()
-      ->setTitle('My text area')
+      ->addTextfield('textfield')
+      ->setTitle('My text field')
       ->setSize(60);
 
     $this->assertEquals(
       [
-        [
+        'button' => [
           '#type' => 'button',
           '#value' => 'My Button',
         ],
-        [
+        'textfield' => [
           '#type' => 'textfield',
-          '#title' => 'My text area',
+          '#title' => 'My text field',
           '#size' => 60,
           '#required' => FALSE,
         ]

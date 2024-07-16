@@ -2,6 +2,8 @@
 
 namespace Drupal\form_data_utilities;
 
+use Drupal\form_data_utilities\FormElementTrait\Children;
+
 abstract class FormElement implements FormElementInterface {
 
   protected ElementType $type;
@@ -22,6 +24,12 @@ abstract class FormElement implements FormElementInterface {
     $traits = $reflection->getTraits();
 
     foreach ($traits as $trait) {
+
+      // Handle child form builders.
+      if ($trait->getName() === Children::class) {
+        $render[] = $this->children()->getRenderArray();
+      }
+
       foreach ($trait->getProperties() as $property) {
         $propertyName = $property->getName();
         $getterMethod = 'get' . ucfirst($propertyName);

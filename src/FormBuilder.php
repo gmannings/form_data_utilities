@@ -15,6 +15,13 @@ class FormBuilder {
    */
   protected array $formElements = [];
 
+  protected ?FormElement $parent = NULL;
+
+  public function setParent(?FormElement $parent): FormBuilder {
+    $this->parent = $parent;
+    return $this;
+  }
+
   /**
    * Get the list of form elements.
    *
@@ -39,8 +46,8 @@ class FormBuilder {
   /**
    * @return \Drupal\form_data_utilities\FormElement\Textfield|\Drupal\form_data_utilities\FormElementInterface
    */
-  public function addTextfield(): Textfield|FormElementInterface {
-    return $this->addElement(ElementType::TEXT_FIELD);
+  public function addTextfield(string $key): Textfield|FormElementInterface {
+    return $this->addElement(ElementType::TEXT_FIELD, $key);
   }
 
   /**
@@ -48,10 +55,10 @@ class FormBuilder {
    *
    * @return \Drupal\form_data_utilities\FormElementInterface
    */
-  public function addElement(ElementType $elementType): FormElementInterface {
+  public function addElement(ElementType $elementType, string $key): FormElementInterface {
     $fqn = $this->getElementClassName($elementType);
-    $formElement = new $fqn($this);
-    $this->formElements[] = &$formElement;
+    $formElement = new $fqn($this, $this->parent);
+    $this->formElements[$key] = &$formElement;
     return $formElement;
   }
 
@@ -77,8 +84,8 @@ class FormBuilder {
   /**
    * @return \Drupal\form_data_utilities\FormElement\Button|\Drupal\form_data_utilities\FormElementInterface
    */
-  public function addButton(): Button|FormElementInterface {
-    return $this->addElement(ElementType::BUTTON);
+  public function addButton(string $key): Button|FormElementInterface {
+    return $this->addElement(ElementType::BUTTON, $key);
   }
 
 }
