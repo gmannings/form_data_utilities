@@ -27,7 +27,10 @@ abstract class FormElement implements FormElementInterface {
 
       // Handle child form builders.
       if ($trait->getName() === Children::class) {
-        $render[] = $this->children()->getRenderArray();
+        $childRenderArray = $this->children()->getRenderArray();
+        if (!empty($childRenderArray)) {
+          $render = array_merge($render, $childRenderArray);
+        }
       }
 
       foreach ($trait->getProperties() as $property) {

@@ -40,9 +40,27 @@ class ContainerTest extends TestCase {
         '#attributes' => [
           'id' => 'test',
           'class' => ['test'],
-        ]
+        ],
       ],
       $this->element->getRenderArray()
+    );
+  }
+
+  #[Test] public function testChildren(): void {
+    $container = new Container($this->mockFormBuilder);
+    $container->children()
+      ->addButton('button')
+      ->setValue('My Button');
+
+    $this->assertEquals(
+      [
+        '#type' => 'container',
+        'button' => [
+          '#type' => 'button',
+          '#value' => 'My Button',
+        ]
+      ],
+      $container->getRenderArray()
     );
   }
 
