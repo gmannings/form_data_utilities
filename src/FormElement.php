@@ -10,11 +10,15 @@ abstract class FormElement implements FormElementInterface {
 
   public function __construct(
     protected FormBuilder $formBuilder,
-    protected ?FormElementInterface $parent = NULL
+    protected ?FormBuilder $parent = NULL
   ) {}
 
-  public function done(): FormBuilder|FormElementInterface {
-    return is_null($this->parent) ? $this->formBuilder : $this->parent;
+  public function done(): FormBuilder {
+    return $this->formBuilder;
+  }
+
+  public function toParent(): FormBuilder|FormElementInterface {
+    return $this->parent;
   }
 
   public function getRenderArray(): array {

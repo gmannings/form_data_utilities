@@ -44,9 +44,48 @@ class FormBuilderTest extends TestCase {
           '#title' => 'My text field',
           '#size' => 60,
           '#required' => FALSE,
-        ]
+        ],
       ],
       $this->formBuilder->getRenderArray()
+    );
+  }
+
+  #[Test] public function testParentChildTraversal(): void {
+    $form = $this->formBuilder
+      ->addButton('button')
+      ->setValue('My Button')
+      ->done()
+      ->addContainer('container')
+      ->children()
+      ->addTextfield('textfield')
+      ->setTitle('My text field')
+      ->setSize(60)
+      ->toParent()
+      ->addButton('button_2')
+      ->setValue('My button 2')
+      ->done();
+
+    $this->assertEquals(
+      [
+        'button' => [
+          '#value' => 'My Button',
+          '#type' => 'button',
+        ],
+        'container' => [
+          '#type' => 'container',
+          'textfield' => [
+            '#type' => 'textfield',
+            '#title' => 'My text field',
+            '#size' => 60,
+            '#required' => FALSE,
+          ]
+        ],
+        'button_2' => [
+          '#type' => 'button',
+          '#value' => 'My button 2',
+        ]
+      ],
+      $form->getRenderArray()
     );
   }
 

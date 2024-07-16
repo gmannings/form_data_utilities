@@ -15,7 +15,7 @@ trait Children {
   public function children(): FormBuilder {
     if (is_null($this->children)) {
       $this->children = new FormBuilder();
-      $this->children->setParent($this);
+      $this->children->setParent($this->formBuilder);
     }
     return $this->children;
   }

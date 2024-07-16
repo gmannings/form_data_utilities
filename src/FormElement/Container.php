@@ -15,7 +15,7 @@ class Container extends FormElement implements FormElementInterface {
   use Attributes;
   use Children;
 
-  public function __construct(FormBuilder $formBuilder, ?FormElementInterface $parent = NULL) {
+  public function __construct(FormBuilder $formBuilder, ?FormBuilder $parent = NULL) {
     parent::__construct($formBuilder, $parent);
     $this->type = ElementType::CONTAINER;
   }

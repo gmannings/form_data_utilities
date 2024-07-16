@@ -3,6 +3,7 @@
 namespace Drupal\form_data_utilities;
 
 use Drupal\form_data_utilities\FormElement\Button;
+use Drupal\form_data_utilities\FormElement\Container;
 use Drupal\form_data_utilities\FormElement\Textfield;
 
 /**
@@ -15,9 +16,9 @@ class FormBuilder {
    */
   protected array $formElements = [];
 
-  protected ?FormElement $parent = NULL;
+  protected ?FormBuilder $parent = NULL;
 
-  public function setParent(?FormElement $parent): FormBuilder {
+  public function setParent(?FormBuilder $parent): FormBuilder {
     $this->parent = $parent;
     return $this;
   }
@@ -82,10 +83,21 @@ class FormBuilder {
   }
 
   /**
+   * @param string $key
+   *
    * @return \Drupal\form_data_utilities\FormElement\Button|\Drupal\form_data_utilities\FormElementInterface
    */
   public function addButton(string $key): Button|FormElementInterface {
     return $this->addElement(ElementType::BUTTON, $key);
+  }
+
+  /**
+   * @param string $key
+   *
+   * @return \Drupal\form_data_utilities\FormElement\Container|\Drupal\form_data_utilities\FormElementInterface
+   */
+  public function addContainer(string $key): Container|FormElementInterface {
+    return $this->addElement(ElementType::CONTAINER, $key);
   }
 
 }
