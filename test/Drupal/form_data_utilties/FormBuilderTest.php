@@ -51,7 +51,7 @@ class FormBuilderTest extends TestCase {
   }
 
   #[Test] public function testParentChildTraversal(): void {
-    $form = $this->formBuilder
+    $this->formBuilder
       ->addButton('button')
       ->setValue('My Button')
       ->done()
@@ -85,7 +85,7 @@ class FormBuilderTest extends TestCase {
           '#value' => 'My button 2',
         ]
       ],
-      $form->getRenderArray()
+      $this->formBuilder->getRenderArray()
     );
   }
 
