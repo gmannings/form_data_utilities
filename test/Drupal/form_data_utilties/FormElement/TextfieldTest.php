@@ -77,6 +77,27 @@ class TextfieldTest extends TestCase {
     );
   }
 
+  #[Test] public function testFromArgumentsMethod(): void {
+    $this->element = new Textfield($this->mockFormBuilder);
+    $this->element->fromArguments(
+      'Test field',
+      size: 60,
+      attributeId: 'test-id'
+    );
+    $this->assertEquals(
+      [
+        '#type' => 'textfield',
+        '#title' => 'Test field',
+        '#size' => 60,
+        '#attributes' => [
+          'id' => 'test-id',
+        ],
+        '#required' => FALSE,
+      ],
+      $this->element->getRenderArray()
+    );
+  }
+
   protected function setUp(): void {
     parent::setUp();
     $this->mockFormBuilder = $this->createMock(FormBuilder::class);

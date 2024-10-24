@@ -81,4 +81,23 @@ abstract class FormElement implements FormElementInterface {
     return strtolower(preg_replace('/[A-Z]/', '_$0', lcfirst($input)));
   }
 
+  /**
+   * Call setters based of a list of property keys and values.
+   *
+   * @param array $argumentList
+   *   Arguments in key => value format, usually from get_defined_vars().
+   *
+   * @return void
+   */
+  protected function callSettersFromArgList(array $argumentList): void {
+    foreach ($argumentList as $argName => $argValue) {
+      // Convert the argument name setter method.
+      $setter = 'set' . str_replace(' ', '', ucwords(str_replace('_', ' ', $argName)));
+
+      if (method_exists($this, $setter)) {
+        $this->{$setter}($argValue);
+      }
+    }
+  }
+
 }

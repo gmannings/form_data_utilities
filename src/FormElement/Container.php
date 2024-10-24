@@ -20,4 +20,13 @@ class Container extends FormElement implements FormElementInterface {
     $this->type = ElementType::CONTAINER;
   }
 
+  public function fromArguments(
+    ?array $attributeClass = NULL,
+    ?string $attributeId = NULL,
+    ?string $attributeName = NULL
+  ): self {
+    $this->callSettersFromArgList(get_defined_vars());
+    return $this;
+  }
+
 }

@@ -25,4 +25,14 @@ class Button extends FormElement implements FormElementInterface {
     $this->type = ElementType::BUTTON;
   }
 
+  public function fromArguments(
+    ?string $value = NULL,
+    ?array $attributeClass = NULL,
+    ?string $attributeId = NULL,
+    ?string $attributeName = NULL
+  ): self {
+    $this->callSettersFromArgList(get_defined_vars());
+    return $this;
+  }
+
 }

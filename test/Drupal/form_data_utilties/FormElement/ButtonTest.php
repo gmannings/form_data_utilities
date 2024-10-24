@@ -6,7 +6,7 @@ use Drupal\form_data_utilities\FormBuilder;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
-class TextfieldTest extends TestCase {
+class ButtonTest extends TestCase {
 
   protected Button $element;
 
@@ -35,7 +35,25 @@ class TextfieldTest extends TestCase {
     $this->assertEquals(
       [
         '#type' => 'button',
-        '#title' => 'My Button',
+        '#value' => 'My Button',
+      ],
+      $this->element->getRenderArray()
+    );
+  }
+
+  #[Test] public function testFromArgumentsMethod(): void {
+    $this->element = new Button($this->mockFormBuilder);
+    $this->element->fromArguments(
+      'Test button',
+      attributeId: 'test-id',
+    );
+    $this->assertEquals(
+      [
+        '#type' => 'button',
+        '#value' => 'Test button',
+        '#attributes' => [
+          'id' => 'test-id',
+        ],
       ],
       $this->element->getRenderArray()
     );

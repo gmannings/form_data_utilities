@@ -29,4 +29,19 @@ class Textfield extends FormElement implements FormElementInterface {
     $this->type = ElementType::TEXT_FIELD;
   }
 
+  public function fromArguments(
+    ?string $title = NULL,
+    ?string $defaultValue = NULL,
+    ?int $size  = NULL,
+    ?int $maxlength = NULL,
+    bool $required = FALSE,
+    ?string $pattern = NULL,
+    ?array $attributeClass = NULL,
+    ?string $attributeId = NULL,
+    ?string $attributeName = NULL
+  ): self {
+    $this->callSettersFromArgList(get_defined_vars());
+    return $this;
+  }
+
 }
