@@ -13,14 +13,29 @@ abstract class FormElement implements FormElementInterface {
     protected ?FormBuilder $parent = NULL
   ) {}
 
+  /**
+   * Provide access back to the FormBuilder when using fluent interfaces.
+   *
+   * @return \Drupal\form_data_utilities\FormBuilder
+   */
   public function done(): FormBuilder {
     return $this->formBuilder;
   }
 
-  public function toParent(): FormBuilder|FormElementInterface {
+  /**
+   * Navigate to the parent FormBuilder if it exists.
+   *
+   * @return \Drupal\form_data_utilities\FormBuilder|\Drupal\form_data_utilities\FormElementInterface
+   */
+  public function toParent(): ?FormBuilder {
     return $this->parent;
   }
 
+  /**
+   * Recursive method to build the current element's render array, and children.
+   *
+   * @return array
+   */
   public function getRenderArray(): array {
     $render = [];
 

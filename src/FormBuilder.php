@@ -37,14 +37,14 @@ class FormBuilder {
    */
   public function getRenderArray(): array {
     return array_map(
-      function($element) {
-        return $element->getRenderArray();
-      },
+      fn($element) => $element->getRenderArray(),
       $this->formElements
     );
   }
 
   /**
+   * @param string $key
+   *
    * @return \Drupal\form_data_utilities\FormElement\Textfield|\Drupal\form_data_utilities\FormElementInterface
    */
   public function addTextfield(string $key): Textfield|FormElementInterface {
@@ -53,6 +53,7 @@ class FormBuilder {
 
   /**
    * @param \Drupal\form_data_utilities\ElementType $elementType
+   * @param string $key
    *
    * @return \Drupal\form_data_utilities\FormElementInterface
    */
